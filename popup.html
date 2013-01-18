@@ -1,10 +1,30 @@
 <html>
 <head>
   <title>Buffer</title>
+  <style type="text/css">
+    body{
+      width:250px;
+      height:100px;
+    }
+    textarea{
+      width:250px;
+      height:50px;
+    }
+    .flash{
+      color: #FFF;
+    }
+    .error{
+      background: red;
+    }
+    .success{
+      background: green;
+    }
+  </style>
 </head>
 <body class="round_borders">
-  <div id="error"></div>
+  <div class="flash"></div>
   <div id="buffer"></div>
+  <!-- Auth view template -->
   <script type="text/template" id="auth_view">
     <button id="connect">Connect Buffer</button>
     <div id="get_code">
@@ -12,9 +32,19 @@
       <button id="btn_submit">Submit</button>
     </div>
   </script>
+
+  <!-- Buffer View template -->
   <script type="text/template" id="buffer_view">
-    <textarea></textarea>
+    <form name="buffer_form" action="#" method="post">
+      <div id="profiles">
+      </div>
+      <textarea name="text"></textarea>
+      <input type="hidden" name="access_token"/>
+      <button id="btn_buffer" type="submit">Buffer</button>
+      <a href="#" id="logout"> Logout </a>
+    </form>
   </script>
+
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/underscore-min.js"></script>
   <script type="text/javascript" src="js/backbone-min.js"></script>
@@ -22,6 +52,7 @@
   <script type="text/javascript" src="js/backbone/views/auth_view.js"></script>
   <script type="text/javascript" src="js/backbone/views/buffer_view.js"></script>
   <script type="text/javascript" src="js/backbone/models/user.js"></script>
+  <script type="text/javascript" src="js/backbone/models/profile.js"></script>
 
 </body>
 </html>

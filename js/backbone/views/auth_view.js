@@ -26,7 +26,7 @@ Buffer.Views.AuthView = Backbone.View.extend({
   },
   showError: function(message){
     this.model.resetAll();
-    $("#error").html(message);
+    $(".flash").html(message).addClass('error');
   },
   showBuffer: function () {
     var bufferView = new Buffer.Views.BufferView({el: $("#buffer"), model: this.model});

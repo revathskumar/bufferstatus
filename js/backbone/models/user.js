@@ -1,4 +1,7 @@
 Buffer.Models.User = Backbone.Model.extend({
+  initialize: function () {
+    this.profiles = new Buffer.Models.Profile({user: this});
+  },
   defaults: function(){
     var data = localStorage.getItem('buffer_app_user');
     user = data && JSON.parse(data);
@@ -36,10 +39,9 @@ Buffer.Models.User = Backbone.Model.extend({
       this.trigger('error', "Invalid Token");
       return;
     }
-    console.log(this);
     this.set({name: data.name, id: data.id}, {silent: true});
     this.save();
-    this.trigger('success');
+    this.profiles.getProfiles();
   },
   error: function(message){
     this.trigger('error', message);
