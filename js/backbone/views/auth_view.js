@@ -5,16 +5,25 @@ Buffer.Views.AuthView = Backbone.View.extend({
   },
   initialize: function(options){
     this.model.on('error', this.showError, this);
-    this.model.on('success', this.showBuffer, this);
+    // this.model.on('success', this.showBuffer, this);
+  },
+  getMessage: function () {
+    var _this = this;
+    chrome.extension.onMessage.addListener(function (request) {
+      console.log(request);
+      _this.saveAuthToken(request);
+    });
   },
   connectBuffer: function() {
-    window.open(
+    this.popup = window.open(
       "http://localhost:3000/auth/buffer/",
       "Buffer", "width=480,height=470,left=400,top=100"
     );
   },
-  saveAuthToken: function(){
-    var token = $("#get_code input:text").val().trim();
+  saveAuthToken: function(request){
+    console.log(request.access_token);
+    var token = request.access_token || $("#get_code input:text").val().trim();
+    console.log(token);
     if(token !== "" && token !== null){
       this.model.save({token:token},{success: function(model){
         model.get('token');
@@ -23,6 +32,7 @@ Buffer.Views.AuthView = Backbone.View.extend({
     }else{
       this.model.trigger('error',"Invalid Token");
     }
+    this.popup.close();
   },
   showError: function(message){
     this.model.resetAll();
