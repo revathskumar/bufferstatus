@@ -15,8 +15,9 @@ Buffer.Views.AuthView = Backbone.View.extend({
     });
   },
   connectBuffer: function() {
+    console.log("window open");
     this.popup = window.open(
-      "http://localhost:3000/auth/buffer/",
+      "http://bufferstatus.herokuapp.com/auth/buffer/",
       "Buffer", "width=480,height=470,left=400,top=100"
     );
   },
