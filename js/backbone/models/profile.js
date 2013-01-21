@@ -22,10 +22,8 @@ Buffer.Models.Profile = Backbone.Model.extend({
   profileSuccess: function (data, textStatus, jqXHR) {
     var profiles = [];
     _.each(data, function(element, index, list){
-      console.log(element);
       profiles.push({id: element.id, default: element.default, service: element.formatted_service});
     });
-    console.log(profiles);
     this.user.save({profiles: profiles});
     this.user.trigger('success');
   },

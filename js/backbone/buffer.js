@@ -7,7 +7,6 @@ window.Buffer = {
     var authToken = user.get('token');
 
     if(authToken === "" || authToken === null){
-      console.log("Hello authView");
       var authView = new Buffer.Views.AuthView({el: $("#buffer"), model: user});
       authView.render();
     }else{
@@ -18,6 +17,5 @@ window.Buffer = {
 };
 
 jQuery(function($){
-  console.log("Hello init");
   Buffer.init();
 });

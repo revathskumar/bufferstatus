@@ -1,6 +1,5 @@
 Buffer.Views.BufferView = Backbone.View.extend({
   initialize: function () {
-    console.log("initialize BufferView");
   },
   events:{
     "submit form": "sendToBuffer",
