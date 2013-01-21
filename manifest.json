@@ -1,6 +1,6 @@
 {
   "name":"Buffer Status",
-  "version":"2.0",
+  "version":"2.0.4",
   "description":"Yet another extension for Buffer app.",
   "manifest_version": 2,
   "browser_action":{
@@ -23,11 +23,7 @@
     "run_at": "document_start"
   }],
   "permissions": [
-    "tabs",
-    "debugger",
-    "https://bufferapp.com/oauth2/authorize",
-    "https://api.bufferapp.com/1/oauth2/token.json",
-    "https://api.bufferapp.com/"
+    "https://api.bufferapp.com/*"
   ],
   "background": {
     "scripts":["js/jquery.min.js","js/underscore-min.js","js/backbone-min.js", "js/backbone/buffer.js","js/backbone/models/user.js","js/backbone/models/profile.js","js/backbone/views/auth_view.js","js/buffer.js"],
