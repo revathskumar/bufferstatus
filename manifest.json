@@ -23,6 +23,7 @@
     "run_at": "document_start"
   }],
   "permissions": [
+    "tabs",
     "https://api.bufferapp.com/*"
   ],
   "background": {

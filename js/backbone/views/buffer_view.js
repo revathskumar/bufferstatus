@@ -3,7 +3,8 @@ Buffer.Views.BufferView = Backbone.View.extend({
   },
   events:{
     "submit form": "sendToBuffer",
-    "click #logout": "logout"
+    "click #logout": "logout",
+    "click form img": "getCurrentTabUrl"
   },
   logout: function () {
     this.model.resetAll();
@@ -57,6 +58,11 @@ Buffer.Views.BufferView = Backbone.View.extend({
   },
   setAccessToken: function () {
     $("input[name=access_token]").val(this.model.get('token'));
+  },
+  getCurrentTabUrl: function (){
+    chrome.tabs.getSelected(null, function(tab) {
+        $("form textarea").val( tab.title + " " + tab.url);
+    });
   },
   render:function(){
     $(this.el).empty().html($('#buffer_view').html());
