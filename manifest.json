@@ -1,6 +1,6 @@
 {
   "name":"Buffer Status",
-  "version":"2.0.4",
+  "version":"2.0.5",
   "description":"Yet another extension for Buffer app.",
   "manifest_version": 2,
   "browser_action":{
