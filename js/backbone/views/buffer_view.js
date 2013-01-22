@@ -61,7 +61,9 @@ Buffer.Views.BufferView = Backbone.View.extend({
   },
   getCurrentTabUrl: function (){
     chrome.tabs.getSelected(null, function(tab) {
+      Url.shorten(tab.url, function(){
         $("form textarea").val( tab.title + " " + tab.url);
+      });
     });
   },
   render:function(){
