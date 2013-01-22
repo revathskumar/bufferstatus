@@ -1,17 +1,21 @@
+if(typeof(exports) !== "undefined"){
+  var $ = require('jquery');
+}
+
 var Url = {
   shorten: function (url,callback) {
-    if(["",null,undefined].indexOf(url) >= 0) return false
-    var url = "http://api.bit.ly/v3/shorten";
+    if(["",null,undefined].indexOf(url) >= 0) return false;
+    var api_url = "http://api.bit.ly/v3/shorten";
     var params = {
       format: 'json',
       longUrl: url,
-      login: 'chromedbird',
-      apiKey: 'R_aa77c64a8258cf704e7fa361555a4d81'
+      login: 'revathskumar',
+      apiKey: ''
     };
 
-    $.ajax({
+    return $.ajax({
       type: 'GET',
-      url: url,
+      url: api_url ,
       data: params,
       dataType: 'json',
       success: function(data, status_param) {
@@ -23,11 +27,15 @@ var Url = {
         }
       },
       error: function (request, status, error) {
-        callback(-1, chrome.i18n.getMessage("ajaxFailed"));
+        callback(-1, "ajaxFailed");
       }
     });
   }
 };
 
-root = module.exports || window.Url
-root.shorten = Url.shorten;
+
+(function(exports, $){
+  exports.shorten = Url.shorten;
+
+}(typeof exports === 'undefined'? this['mymodule']={}: exports, $));
+
