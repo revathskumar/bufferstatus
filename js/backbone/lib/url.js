@@ -20,9 +20,11 @@ var Url = {
       dataType: 'json',
       success: function(data, status_param) {
         var status = data.status_code;
+        console.log(status);
         if(status == 200) {
-          callback(0, data.data.url);
+          callback(status, data.data.url);
         } else {
+          console.log(status);
           callback(status, data.status_txt);
         }
       },
@@ -38,4 +40,3 @@ var Url = {
   exports.shorten = Url.shorten;
 
 }(typeof exports === 'undefined'? this['mymodule']={}: exports, $));
-

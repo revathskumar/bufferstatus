@@ -1,5 +1,7 @@
 Buffer.Views.BufferView = Backbone.View.extend({
   initialize: function () {
+    this.model.on('error', this.error, this);
+    this.model.on('hide_message', this.hide_message, this);
   },
   events:{
     "submit form": "sendToBuffer",
@@ -15,6 +17,7 @@ Buffer.Views.BufferView = Backbone.View.extend({
     authView.render();
   },
   sendToBuffer: function (e) {
+    this.model.trigger('hide_message');
     e.preventDefault();
     e.stopPropagation();
     var _this = this,
@@ -39,6 +42,9 @@ Buffer.Views.BufferView = Backbone.View.extend({
   error: function(message){
     $(".flash").html(message).addClass('error');
   },
+  hide_message: function () {
+    $(".flash").hide();
+  },
   addProfiles: function(){
     var profiles = this.model.profiles.get();
     // call getProfiles if profiles are empty
@@ -60,9 +66,17 @@ Buffer.Views.BufferView = Backbone.View.extend({
     $("input[name=access_token]").val(this.model.get('token'));
   },
   getCurrentTabUrl: function (){
+    this.model.trigger('hide_message');
+    var _this = this;
     chrome.tabs.getSelected(null, function(tab) {
       Url.shorten(tab.url, function(status,url){
-        $("form textarea").val( tab.title + " " + url);
+        if(status == 200){
+          var textarea = $("form textarea");
+          var text = textarea.val();
+          textarea.val( text + " " + tab.title + " " + url);
+        }else{
+          _this.model.trigger('error', url);
+        }
       });
     });
   },
