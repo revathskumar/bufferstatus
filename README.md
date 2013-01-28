@@ -2,7 +2,9 @@
 
 Yet another extension for Buffer app.
 
-Easily add tweets/facebook status to bufferapp which doen't have links.
+* Easily add tweets/facebook status to bufferapp which doen't have links.
+* Insert current tab url
+* Url shortened with bit.ly while inserting.
 
 ### Screenshot
 
