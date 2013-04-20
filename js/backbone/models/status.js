@@ -1,3 +1,7 @@
-Buffer.Models.Profile = Backbone.Model.extend({
+Buffer.Models.Status = Backbone.Model.extend({
+
+  default:{
+    text: ""
+  }
 
 });

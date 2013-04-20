@@ -2,15 +2,24 @@ Buffer.Views.BufferView = Backbone.View.extend({
   initialize: function () {
     this.model.on('error', this.error, this);
     this.model.on('hide_message', this.hide_message, this);
+    this.status = new Buffer.Models.Status();
+    this.status.on('change:text', this.update_char_count, this);
   },
   events:{
     "submit form": "sendToBuffer",
     "click #logout": "logout",
     "click form img": "getCurrentTabUrl",
-    "blur form textarea": "draft"
+    "blur form textarea": "draft",
+    'keyup form textarea': 'update_model'
   },
-  draft: function () {
-
+  draft: function (e) {
+    localStorage.setItem('buffer_app_draft', $(e.target).val());
+  },
+  update_model: function(e) {
+    this.status.set('text', $(e.target).val());
+  },
+  update_char_count: function(e) {
+    $('.char-count').html(this.status.get('text').length);
   },
   logout: function () {
     this.model.resetAll();
@@ -42,6 +51,7 @@ Buffer.Views.BufferView = Backbone.View.extend({
   success: function (data) {
     $(".flash").html("Added to buffer").addClass('success').show();
     $("form textarea").val("");
+    localStorage.setItem('buffer_app_draft', '');
   },
   error: function(message){
     $(".flash").html(message).addClass('error').show();
@@ -80,7 +90,9 @@ Buffer.Views.BufferView = Backbone.View.extend({
           if(text !== ''){
             text = text + ' ';
           }
-          textarea.val( text + tab.title + " " + url);
+          statusText = text + tab.title + " " + url;
+          textarea.val(statusText);
+          _this.status.set('text', statusText);
         }else{
           _this.model.trigger('error', url);
         }
@@ -91,6 +103,9 @@ Buffer.Views.BufferView = Backbone.View.extend({
     $(this.el).empty().html($('#buffer_view').html());
     this.addProfiles();
     this.setAccessToken();
+    var draft = localStorage.getItem('buffer_app_draft');
+    this.status.set('text', draft);
+    $("form textarea").val(draft);
     return this;
   }
 });
