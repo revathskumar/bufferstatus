@@ -17,7 +17,7 @@
       "http://bufferstatus.herokuapp.com/auth/buffer/callback*"
     ],
     "js": [
-      "js/jquery.min.js",
+      "js/vendor/jquery/jquery.min.js",
       "js/contentscript.js"
     ],
     "run_at": "document_start"
@@ -27,7 +27,7 @@
     "https://api.bufferapp.com/*"
   ],
   "background": {
-    "scripts":["js/jquery.min.js","js/underscore-min.js","js/backbone-min.js", "js/backbone/buffer.js","js/backbone/models/user.js","js/backbone/models/profile.js","js/backbone/views/auth_view.js","js/buffer.js"],
+    "scripts":["js/vendor/jquery/jquery.min.js","js/vendor/underscore/underscore-min.js","js/vendor/backbone/backbone-min.js", "js/backbone/buffer.js","js/backbone/models/user.js","js/backbone/models/profile.js","js/backbone/views/auth_view.js","js/buffer.js"],
     "persistent": false
   }
 }
