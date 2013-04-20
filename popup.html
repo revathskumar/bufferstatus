@@ -24,6 +24,10 @@
       float: right;
       cursor: pointer;
     }
+    .pull-right{
+      float: right;
+      width: 40px;
+    }
   </style>
 </head>
 <body class="round_borders">
@@ -43,7 +47,10 @@
       <input type="hidden" name="access_token"/>
       <button id="btn_buffer" type="submit">Buffer</button>
       <a href="#" id="logout"> Logout </a>
-      <img src="images/web.gif" alt="get url" title="Insert current tab url"/>
+      <div class='pull-right'>
+        <span class='char-count'>0</span>
+        <img src="images/web.gif" alt="get url" title="Insert current tab url"/>
+      <div>
     </form>
   </script>
 

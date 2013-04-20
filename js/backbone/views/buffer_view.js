@@ -6,7 +6,11 @@ Buffer.Views.BufferView = Backbone.View.extend({
   events:{
     "submit form": "sendToBuffer",
     "click #logout": "logout",
-    "click form img": "getCurrentTabUrl"
+    "click form img": "getCurrentTabUrl",
+    "blur form textarea": "draft"
+  },
+  draft: function () {
+
   },
   logout: function () {
     this.model.resetAll();
@@ -36,11 +40,11 @@ Buffer.Views.BufferView = Backbone.View.extend({
     return false;
   },
   success: function (data) {
-    $(".flash").html("Added to buffer").addClass('success');
+    $(".flash").html("Added to buffer").addClass('success').show();
     $("form textarea").val("");
   },
   error: function(message){
-    $(".flash").html(message).addClass('error');
+    $(".flash").html(message).addClass('error').show();
   },
   hide_message: function () {
     $(".flash").hide();
@@ -73,7 +77,10 @@ Buffer.Views.BufferView = Backbone.View.extend({
         if(status == 200){
           var textarea = $("form textarea");
           var text = textarea.val();
-          textarea.val( text + " " + tab.title + " " + url);
+          if(text !== ''){
+            text = text + ' ';
+          }
+          textarea.val( text + tab.title + " " + url);
         }else{
           _this.model.trigger('error', url);
         }
