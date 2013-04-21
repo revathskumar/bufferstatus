@@ -3,3 +3,4 @@ js/vendor/
 package/
 node_modules
 dist/
+app/scripts/vendor/

@@ -10,7 +10,7 @@ var Url = {
       format: 'json',
       longUrl: url,
       login: 'revathskumar',
-      apiKey: ''
+      apiKey: 'R_1ea4edb679771367e21f7313594c5b91'
     };
 
     return $.ajax({

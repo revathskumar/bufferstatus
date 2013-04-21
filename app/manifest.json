@@ -1,0 +1,35 @@
+{
+  "name": "Buffer Status",
+  "version": "2.0.28",
+  "description": "Yet another extension for Buffer app.",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "images/buffer16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/buffer16.png",
+    "48": "images/buffer48.png",
+    "128": "images/buffer128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://bufferstatus.herokuapp.com/auth/buffer/callback*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "https://api.bufferapp.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/buffer.js"
+    ],
+    "persistent": false
+  }
+}
