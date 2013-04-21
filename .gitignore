@@ -1,2 +1,5 @@
 node_modules/
 js/vendor/
+package/
+node_modules
+dist/
